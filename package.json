@@ -1,0 +1,14 @@
+{
+  "name": "todo-life-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A clean, minimal client-side dashboard aggregating a greeting, a 25-minute focus timer, a to-do list, and quick links. Plain HTML, a single CSS file, and a single Vanilla JavaScript ES module, with all state persisted in Local Storage. Test tooling (Vitest + fast-check + happy-dom) is dev-only and does not alter the production artifacts in css/ and js/.",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "fast-check": "4.10.2",
+    "happy-dom": "21.0.4",
+    "vitest": "5.0.5"
+  }
+}

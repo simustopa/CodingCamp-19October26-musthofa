@@ -1,0 +1,332 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#f5f6fa">
+  <meta name="description" content="A personal productivity dashboard to organize tasks and focus.">
+
+  <title>Daymark — Life Dashboard</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+
+<body>
+  <div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Daymark home">
+        <span class="brand-mark">D</span>
+        <span>daymark<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="#overview" class="nav-item active">
+          <span class="nav-icon">◫</span>
+          Overview
+        </a>
+
+        <a href="#todo" class="nav-item">
+          <span class="nav-icon">☷</span>
+          My tasks
+        </a>
+
+        <a href="#focus" class="nav-item">
+          <span class="nav-icon">◷</span>
+          Focus timer
+        </a>
+
+        <a href="#links" class="nav-item">
+          <span class="nav-icon">↗</span>
+          Quick links
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span class="note-icon">✳</span>
+          <p>A little progress each day adds up to big results.</p>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          Your personal workspace
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content" id="overview">
+
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+          <h1>Life dashboard<span class="heading-period">.</span></h1>
+        </div>
+
+        <div class="topbar-date">
+          <span class="topbar-date-icon">◷</span>
+          <span id="current-date">Loading date...</span>
+        </div>
+      </header>
+
+      <!-- Greeting -->
+      <section class="welcome-section" id="greeting">
+        <div class="welcome-copy">
+          <span class="welcome-label">A FRESH START</span>
+
+          <h2 id="greeting-text">Hello, there.</h2>
+
+          <p>
+            Make today count. One task at a time.
+          </p>
+        </div>
+
+        <div class="clock-widget">
+          <span class="clock-label">YOUR LOCAL TIME</span>
+          <time id="current-time">00:00</time>
+          <span class="clock-caption">Take a breath. You've got this.</span>
+        </div>
+
+        <div class="welcome-decoration" aria-hidden="true"></div>
+      </section>
+
+      <!-- Summary cards -->
+      <section class="summary-grid" aria-label="Task summary">
+        <article class="summary-card">
+          <div class="summary-top">
+            <span class="summary-label">TOTAL TASKS</span>
+            <span class="summary-icon task-icon">☷</span>
+          </div>
+
+          <strong id="total-tasks">0</strong>
+          <p>Tasks in your list</p>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-top">
+            <span class="summary-label">COMPLETED</span>
+            <span class="summary-icon complete-icon">✓</span>
+          </div>
+
+          <strong id="completed-tasks">0</strong>
+          <p>Small wins, big progress</p>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-top">
+            <span class="summary-label">REMAINING</span>
+            <span class="summary-icon remaining-icon">◷</span>
+          </div>
+
+          <strong id="remaining-tasks">0</strong>
+          <p>Things left to accomplish</p>
+        </article>
+      </section>
+
+      <!-- Main dashboard grid -->
+      <div class="content-grid">
+
+        <!-- To-do list -->
+        <section class="panel todo-panel" id="todo">
+          <div class="panel-header">
+            <div>
+              <span class="section-kicker">STAY ORGANIZED</span>
+              <h2>My tasks</h2>
+              <p class="panel-subtitle">Keep your priorities in sight.</p>
+            </div>
+
+            <span class="panel-count" id="task-count">0 tasks</span>
+          </div>
+
+          <form id="todo-form" class="input-row">
+            <label class="sr-only" for="todo-input">New task</label>
+
+            <input
+              id="todo-input"
+              type="text"
+              placeholder="What needs to get done?"
+              maxlength="200"
+              autocomplete="off"
+              required
+            >
+
+            <button class="primary-button" type="submit">
+              <span aria-hidden="true">+</span>
+              Add task
+            </button>
+          </form>
+
+          <p class="widget-message" id="todo-message" role="status" aria-live="polite"></p>
+
+          <div class="task-toolbar">
+            <span class="toolbar-label">YOUR CHECKLIST</span>
+
+            <div class="filter-group" aria-label="Filter tasks">
+              <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">
+                All
+              </button>
+
+              <button type="button" class="filter-button" data-filter="active" aria-pressed="false">
+                Active
+              </button>
+
+              <button type="button" class="filter-button" data-filter="completed" aria-pressed="false">
+                Done
+              </button>
+            </div>
+          </div>
+
+          <ul id="task-list" class="task-list" aria-label="Your tasks">
+            <li class="empty-state">
+              <span class="empty-icon">✳</span>
+              <strong>A clean slate.</strong>
+              <span>Add your first task to get started.</span>
+            </li>
+          </ul>
+
+          <div class="todo-footer">
+            <span id="task-progress-text">0 of 0 completed</span>
+
+            <div class="progress-track" role="progressbar"
+                 aria-label="Task completion progress"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="0"
+                 id="task-progress">
+              <span id="task-progress-bar"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Focus timer -->
+        <section class="panel focus-panel" id="focus">
+          <div class="panel-header">
+            <div>
+              <span class="section-kicker">MAKE IT COUNT</span>
+              <h2>Focus session</h2>
+              <p class="panel-subtitle">One thing at a time.</p>
+            </div>
+
+            <span class="focus-badge">25 MIN</span>
+          </div>
+
+          <div class="timer-area">
+            <div class="timer-ring">
+              <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
+                <circle class="timer-track" cx="100" cy="100" r="88"></circle>
+
+                <circle
+                  class="timer-progress"
+                  id="timer-progress"
+                  cx="100"
+                  cy="100"
+                  r="88"
+                ></circle>
+              </svg>
+
+              <div class="timer-center">
+                <span class="timer-status" id="timer-status">READY TO FOCUS</span>
+
+                <time id="timer-display">25:00</time>
+
+                <span class="timer-caption">minutes : seconds</span>
+              </div>
+            </div>
+
+            <p class="timer-message" id="timer-message" role="status" aria-live="polite">
+              Find your focus. Forget the noise.
+            </p>
+          </div>
+
+          <div class="timer-controls">
+            <button type="button" class="primary-button timer-start" id="timer-start">
+              Start focus
+            </button>
+
+            <button type="button" class="secondary-button" id="timer-stop">
+              Pause
+            </button>
+
+            <button type="button" class="reset-button" id="timer-reset" aria-label="Reset timer">
+              ↺
+            </button>
+          </div>
+
+          <div class="focus-tip">
+            <span aria-hidden="true">✳</span>
+            <p>Try putting distractions away for the next 25 minutes.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Quick links -->
+      <section class="panel links-panel" id="links">
+        <div class="panel-header">
+          <div>
+            <span class="section-kicker">YOUR DIGITAL SHORTCUTS</span>
+            <h2>Quick links</h2>
+            <p class="panel-subtitle">Your favorite places, one click away.</p>
+          </div>
+
+          <span class="links-count" id="links-count">0 links</span>
+        </div>
+
+        <form id="links-form" class="links-form">
+          <div class="field-group">
+            <label for="link-name">LINK NAME</label>
+
+            <input
+              id="link-name"
+              type="text"
+              maxlength="100"
+              placeholder="e.g. My workspace"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <div class="field-group link-url-field">
+            <label for="link-url">WEBSITE URL</label>
+
+            <input
+              id="link-url"
+              type="url"
+              placeholder="https://example.com"
+              autocomplete="url"
+              required
+            >
+          </div>
+
+          <button type="submit" class="secondary-button add-link-button">
+            <span aria-hidden="true">+</span>
+            Add link
+          </button>
+        </form>
+
+        <p class="widget-message" id="links-message" role="status" aria-live="polite"></p>
+
+        <div id="links-list" class="links-grid">
+          <div class="links-empty">
+            Your shortcuts will appear here.
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>DAYMARK<span class="brand-dot">.</span></span>
+        <span>Make room for what matters.</span>
+      </footer>
+
+    </main>
+  </div>
+</body>
+</html>
+```

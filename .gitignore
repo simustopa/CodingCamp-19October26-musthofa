@@ -1,0 +1,12 @@
+# Dependencies — dev-only test tooling, installed via `npm install`.
+# These do not alter the production artifacts (css/style.css and js/app.js).
+node_modules/
+
+# npm / tooling logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
